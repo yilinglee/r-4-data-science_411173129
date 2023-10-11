@@ -1,0 +1,79 @@
+# To ensure Chinese characters are displayed correctly
+options(encoding = "UTF-8")
+Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
+
+
+data1 <- list(
+  file = "data/international_flights.json",
+  meta = list(
+    name = "國際航空定期時刻表",
+    source_link = "https://data.gov.tw/dataset/161167")
+)
+
+flights <- list(
+  data = list(data1)
+)
+saveRDS(flights, "data/flights.rds")
+
+flights = readRDS("data/flights.rds")
+# Read JSON file
+
+filepath = flights$data[[1]]$file
+flightsData <- jsonlite::fromJSON(filepath)
+
+flights$data[[1]]$data_frame <- flightsData
+
+saveRDS(flights, "data/flights.rds")
+typeof(flightsData)
+class(flightsData)
+person1 <- list(
+  name = "John",
+  age = 30,
+  married = TRUE
+)
+person2 <- list(
+  name = "Mary",
+  age = 25,
+  married = FALSE
+)
+person3 <- list(
+  name = "Tom",
+  age = 35,
+  married = TRUE
+)
+
+# observation by observation stacking
+data_obo <- list(person1, person2, person3)
+person1 <- list(
+  name = "John",
+  age = 30,
+  married = TRUE
+)
+person2 <- list(
+  name = "Mary",
+  age = 25,
+  married = FALSE
+)
+person3 <- list(
+  name = "Tom",
+  age = 35,
+  married = TRUE
+)
+
+# observation by observation stacking
+data_obo <- list(person1, person2, person3)
+
+flightsData$ArrivalAirportID |> unlist() |> table() |> sort(decreasing = T)
+install.packages("airportr")
+
+library(airportr)
+han <- airport_lookup("HAN", output_type=c("city"))
+
+han 
+
+tpe_han <- airport_distance("TPE","HAN")
+
+tpe_han
+
+
+
